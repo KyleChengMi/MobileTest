@@ -2,7 +2,6 @@ package com.example.mobiletest
 
 import android.content.Context
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import java.util.concurrent.TimeUnit
 
 class DataRepository(private val context: Context) {
