@@ -37,17 +37,4 @@ class DataRepository(private val context: Context) {
             println("Error occurred while refreshing data.")
         }
     }
-
-    fun saveData(newData: BookingItem) {
-        try {
-            val gson = GsonBuilder().setPrettyPrinting().create()
-            val jsonData = gson.toJson(newData)
-            println("Saving data: $jsonData")
-            bookingItem = newData
-            lastUpdatedTime = System.currentTimeMillis()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            println("Error occurred while saving data.")
-        }
-    }
 }

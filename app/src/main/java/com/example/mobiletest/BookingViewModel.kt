@@ -1,17 +1,14 @@
 package com.example.mobiletest
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 class BookingViewModel(private val repository: DataRepository) {
 
-    private var _bookingItem by mutableStateOf<BookingItem?>(null)
-
-    val bookingItem: BookingItem?
-        get() = _bookingItem
+    private val _bookingItemLiveData = MutableLiveData<BookingItem>()
+    val bookingItemLiveData: LiveData<BookingItem> = _bookingItemLiveData
 
     fun getData() {
-        _bookingItem = repository.getData()
+        _bookingItemLiveData.value = repository.getData()
     }
 }

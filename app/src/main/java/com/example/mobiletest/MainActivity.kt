@@ -12,10 +12,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobiletest.ui.theme.MobileTestTheme
+import kotlinx.coroutines.delay
 
 
 class MainActivity : ComponentActivity() {
@@ -39,11 +41,11 @@ class MainActivity : ComponentActivity() {
     fun SegmentListUI(context: Context) {
         val repository = DataRepository(context)
         val viewModel = BookingViewModel(repository)
-        viewModel.getData()
 
-        viewModel.bookingItem?.segmentList?.let { segments ->
-            LazyColumn {
-                items(segments) { segment ->
+        viewModel.getData()
+        LazyColumn {
+            viewModel.bookingItemLiveData.observeForever {
+                items(it.segments) { segment ->
                     Column {
                         Text("ID: ${segment.id}")
                         Text("Origin: ${segment.originAndDestinationPair.origin.displayName}")
